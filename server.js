@@ -8,6 +8,7 @@
 
 var express = require('express');
 var bodyParser = require('body-parser');
+var sendgrid = require('sendgrid')(process.env.SENDGRID_USERNAME, process.env.SENDGRID_PASSWORD);
 
 //create an express application
 var app = express();
@@ -29,6 +30,18 @@ app.use(function(err, req, res, next) {
 
 app.get('/api/send', function (req, res){
     // do something here
+    sendgrid.send({
+        to: req.query.to,
+        from: 'info343@ischool.uw.edu',
+        subject: req.query.subject,
+        text: req.query.text
+    }, function(err, json) {
+        if (err) {
+            res.status(500).send('internal server ror!');
+        } else {
+            res.status(200).send('email sent!');
+        }
+    });
 });
 
 var port = process.env.YOUR_PORT || process.env.PORT || 8080;
