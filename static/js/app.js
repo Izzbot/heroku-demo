@@ -13,7 +13,7 @@ $(document).ready(function() {
         // email info here!
         var data = {
             to: $('#submitForm input[name="email"]').val(),
-            subject: $('#submitForm input[name="email"]').val(),
+            subject: $('#submitForm input[name="subject"]').val(),
             text: $('#submitForm input[name="text"]').val()
         }
         $.ajax('api/send', {

@@ -37,17 +37,17 @@ app.get('/api/send', function (req, res){
         text: req.query.text
     }, function(err, json) {
         if (err) {
-            res.status(500).send('internal server ror!');
+            res.status(500).send('internal server error!');
         } else {
             res.status(200).send('email sent!');
         }
     });
 });
 
-var port = process.env.YOUR_PORT || process.env.PORT || 8080;
-var host = process.env.YOUR_ST || '0.0.0.0';
-
 //start the web server
+var port = process.env.YOUR_PORT || process.env.PORT || 8080;
+var host = process.env.YOUR_HOST || '0.0.0.0';
+
 var server = app.listen(port, host, function() {
     console.log('listening for requests sent to http://localhost:%s', server.address().port);
 });
